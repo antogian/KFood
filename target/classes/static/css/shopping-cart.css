@@ -1,0 +1,17 @@
+.cart-total
+{
+    text-align: center;
+    border: 1px double grey;
+    color: white;
+}
+
+.cart-total h5
+{
+    display: inline;
+}
+
+.cart-submit
+{
+    height: 1%;
+    background: black;
+}

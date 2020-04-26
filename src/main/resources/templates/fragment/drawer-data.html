@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body class="bg-secondary">
+<div th:fragment="cart-data(bucket)">
+    <!-- --------------------------------------------------------------------------->
+    <hr>
+    <h5 class="text-center"><strong>Your Cart</strong></h5>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-mute">Qty</th>
+                    <th class="text-mute">Item</th>
+                    <th class="text-center">Cost</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry, iter : ${bucket.entries}">
+                    <td>
+                        <span class="badge badge-secondary badge-pill" th:text="${entry.quantity}"></span>
+                    </td>
+                    <td>
+                        <b><u><a th:href="'/menu/item/edit/' + ${entry.item.id}" th:text="${entry.item.name}"></a></u></b>
+                    </td>
+                    <td class="text-center">
+                        <span th:text="'$' + ${entry.item.totalCost}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{|/delete?item=${entry.item.id}|}">
+                            <img th:src="@{/img/google/1x/baseline_close_black_18dp.png}" alt="Remove" style="max-width: none;" />
+                        </a>
+                    </td>
+                </tr>
+                <thead rowspan="4">
+                    <th></th>
+                    <th><strong>TOTAL</strong></th>
+                    <th class="text-center"><strong th:text="${bucket.totalCost} + '$'"></strong></th>
+                    <th></th>
+                </thead>
+            </tbody>
+        </table>
+    </div>
+    <!--<div class="bg-secondary">-->
+        <!--<div class="cart-total">-->
+            <!--<h5>-->
+                <!--Total: &nbsp; <span th:text="${bucket.totalCost} + '$'"></span>-->
+            <!--</h5>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="bg-success text-center">
+        <a class="btn btn-block btn-success" href="/proceed"> CHECKOUT </a>
+    </div>
+</div>
+</body>
+</html>

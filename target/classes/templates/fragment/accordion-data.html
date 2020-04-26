@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="menu(allCats)">
+    <section id="accordion" class="col-12">
+        <div th:each="cat : ${allCats}">
+            <div class="custom-card card">
+                <div class="custom-card-header card-header" th:id="${cat.name} + 'Heading'">
+                    <h5 class="menu-title mb-0">
+                        <a class="custom-a custom-collapsed collapsed" role="button" th:text="${cat.name}"
+                           th:href="'#' + ${#strings.replace(cat.name,' ','')} +'Collapse'" data-toggle="collapse" aria-expanded="false"
+                           th:attr="aria-controls=${#strings.replace(cat.name,' ','')} + 'Collapse', data-target='#' + ${#strings.replace(cat.name,' ','')} + 'Collapse'">
+                        </a>
+                    </h5>
+                </div>
+            </div>
+            <div th:id="${#strings.replace(cat.name,' ','')} + 'Collapse'" class="custom-collapse collapse custom-in in" role="tabpanel"
+                 th:attr="aria-labelledby=${#strings.replace(cat.name,' ','')} + 'Heading'" data-parent="#accordion">
+                <div class="custom-card-body">
+                    <div th:each="item : ${cat.allItems}">
+                        <div class="list-group">
+                            <a th:href="'menu/item/' + ${item.id}" class="custom-a list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1" th:text="${item.name}"></h5>
+                                    <small th:text="${item.totalCost} + '$'"></small>
+                                </div>
+                                <!--<p class=" d-none d-sm-block mb-1" th:text="${item.description}"></p> -->
+                                <small class="text-muted">Click to Order</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div th:replace="/fragment/item-modal :: itemModal(item=${item})"></div>-->
+        <!--<div th:replace="/fragment/new-item-modal :: selectedItemViewModal"></div>-->
+        <!--th:onclick="'javascript:openModal(\'' + ${item.id} + '\');'"-->
+
+    </section> <!-- accordion -->
+</div>
+
+</body>
+</html>

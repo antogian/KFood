@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ATHENA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <!--<link rel="stylesheet" th:href="@{/css/accordion.css}" type="text/css" />-->
+    <link rel="stylesheet" th:href="@{/css/tabs.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/qualifiers.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/cart-drawer.css}" type="text/css" />
+</head>
+<body class="bg-light">
+
+<div class="container-fluid">
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home">ATHENA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item disabled">
+                        <a class="nav-link disabled" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu">Menu</a>
+                    </li>
+                    <li class="nav-item disabled">
+                        <a class="nav-link disabled" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div id="cd-cart-trigger">
+                    <div th:switch="${totalItems}">
+                        <div th:case="0">
+                            <ul class="navbar-nav ml-auto badge-secondary" id="cart-area-empty">
+                                <a href=#0 style="text-decoration: none;">
+                                    <span class="badge badge-secondary badge-pill">0</span>
+                                    <img class="img-fluid" th:src="@{/img/google/2x/baseline_shopping_cart_white_18dp.png}" alt="shopping_cart">
+                                    </img>
+                                    <span class="badge badge-secondary badge-pill">$0.00</span>
+                                </a>
+                            </ul>
+                        </div>
+                        <div th:case="*">
+                            <ul class="navbar-nav ml-auto badge-success" id="cart-area-full">
+                                <a href=#0 style="text-decoration: none;">
+                                    <span class="badge badge-success badge-pill" th:text="${totalItems}"></span>
+                                    <img class="img-fluid" th:src="@{/img/google/2x/baseline_shopping_cart_white_18dp.png}" alt="shopping_cart">
+                                    </img>
+                                    <span class="badge badge-success badge-pill" th:text="'$' + ${bucket.totalCost}"></span>
+                                </a>
+                            </ul>
+                        </div> <!-- case -->
+                    </div> <!-- switch -->
+                </div> <!-- cd-card-trigger -->
+                <!--<ul class="navbar-nav ml-auto">-->
+                    <!--<div sec:authorize="isAuthenticated()">-->
+                        <!--&lt;!&ndash;<img th:src="@{/img/iconic/png/circle-x-2x.png}" alt="Profile" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Logout</a>&ndash;&gt;-->
+                        <!--<div class="dropdown">-->
+                            <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="user" data-toggle="dropdown"-->
+                                    <!--th:text="${username}">-->
+                                <!--&lt;!&ndash;Account&ndash;&gt;-->
+                            <!--</button>-->
+                            <!--<div class="dropdown-menu" role="menu" aria-labelledby="user">-->
+                                <!--<a class="dropdown-item disabled" role="presentation" href="/user">-->
+                                    <!--<img th:src="@{/img/iconic/png/person-2x.png}" alt="Profile" />-->
+                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;Profile-->
+                                <!--</a>-->
+                                <!--<div class="dropdown-divider" role="presentation"></div>-->
+                                <!--<a class="dropdown-item" href="/logout">-->
+                                    <!--<img th:src="@{/img/iconic/png/account-logout-2x.png}" alt="Profile" />-->
+                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;Logout-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div sec:authorize="isAnonymous()">-->
+                        <!--<a href="/user" class="btn btn-success active" role="button" aria-pressed="true">Login/Sign Up</a>-->
+                    <!--</div>-->
+                <!--</ul>-->
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div id="cd-shadow-layer"></div>
+
+    <div id="cd-cart" class="bg-light bg-md-white">
+        <div th:switch="${totalItems}">
+            <div th:case="0">
+                <div th:replace="fragment/drawer-empty :: cart">
+                </div>
+            </div>
+            <div th:case="*">
+                <div th:replace="fragment/drawer-data :: cart-data(bucket=${bucket})">
+                </div>
+            </div>
+        </div>
+    </div> <!-- cd-cart -->
+
+    <hr>
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-12 col-md">
+            <!-- Title -->
+            <h1 class="mt-4 display-4 text-center">Soul Kitchen</h1>
+
+            <hr>
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="http://placehold.it/1200x300" alt="logo">
+
+            <hr>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div th:replace="fragment/modifiers :: modifiersForm"></div>
+        </div>
+        <!--<div class="col-md-4 col-12 mb-4">-->
+            <!--&lt;!&ndash; <div class="d-sm-block d-none"> &ndash;&gt;-->
+            <!--<div class="d-md-none d-block">-->
+                <!--<hr>-->
+            <!--</div>-->
+            <!--<div th:switch="${totalItems}">-->
+                <!--<div th:case="0">-->
+                    <!--<div th:replace="fragment/cart-empty :: cart">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div th:case="*">-->
+                    <!--<div th:replace="fragment/cart-data :: cart-data(bucket=${bucket})">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!-- Sidebar Widgets Column -->
+    </div>
+    <!-- /.row -->
+    <hr>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="footer py-5 mt-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; AthenaPOS 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script th:src="@{/js/drawer.js}"></script>
+<script th:src="@{/js/modernizr.js}"></script>
+
+</body>
+</html>

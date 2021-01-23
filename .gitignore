@@ -2,3 +2,8 @@
 /shelf/
 /workspace.xml
 .idea/
+target/
+athena.iml
+mvnw
+mvnw.cmd
+.mvn/

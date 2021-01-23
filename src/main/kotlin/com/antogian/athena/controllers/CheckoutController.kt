@@ -100,7 +100,7 @@ constructor(private val userService: UserService,
         val order = Order()
         order.cart = cart
         order.user = currentUser
-        order.isPaid = charge.getPaid()
+        order.isPaid = charge.paid
 
         orderService.insertOrder(order)
 
@@ -124,7 +124,7 @@ constructor(private val userService: UserService,
 
         currentUser!!.firstName = firstName
         currentUser!!.lastName = lastName
-        //TODO: Made them comments for the purpose of MongoDB training
+        //TODO: Made them comments for of MongoDB training
         //        currentUser.setEmail(email);
         //        currentUser.setPhoneNumber(phoneNumber);
         //        currentUser.setCity(city);

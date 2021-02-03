@@ -4,7 +4,7 @@ import com.antogian.athena.model.CartEntry
 import com.antogian.athena.dto.entities.CategoryDTO
 import com.antogian.athena.dto.entities.ItemDTO
 import com.antogian.athena.model.ShoppingCart
-import com.antogian.athena.dto.CategoryCoverter
+import com.antogian.athena.dto.CategoryConverter
 import com.antogian.athena.dto.ItemConverter
 import com.antogian.athena.services.MenuService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest
 class CategoryController
 
 @Autowired
-constructor(private val categoryCoverter: CategoryCoverter, private val itemConverter: ItemConverter,
+constructor(private val categoryConverter: CategoryConverter, private val itemConverter: ItemConverter,
             private val menuService: MenuService) {
     private var allCats: List<CategoryDTO>? = null
     private var shoppingCart: ShoppingCart? = null
@@ -31,7 +31,7 @@ constructor(private val categoryCoverter: CategoryCoverter, private val itemConv
         shoppingCart = ShoppingCart()
         allCats = ArrayList<CategoryDTO>()
         try {
-            allCats = categoryCoverter.allCats
+            allCats = categoryConverter.allCats
         } catch (e: Exception) {
             e.printStackTrace()
         }

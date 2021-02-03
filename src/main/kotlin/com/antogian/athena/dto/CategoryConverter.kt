@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.util.ArrayList
 
 @Service
-class CategoryCoverter
+class CategoryConverter
 
 @Autowired
 constructor(private val catDao: CategoryDAO, private val itemConverter: ItemConverter) {

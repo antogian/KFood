@@ -4,7 +4,7 @@ import com.antogian.athena.entities.Order
 import com.antogian.athena.model.CartEntry
 import com.antogian.athena.dto.entities.CategoryDTO
 import com.antogian.athena.model.ShoppingCart
-import com.antogian.athena.dto.CategoryCoverter
+import com.antogian.athena.dto.CategoryConverter
 import com.antogian.athena.services.OrderService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,7 +20,7 @@ constructor(private val orderService: OrderService) {
     private var allCats: List<CategoryDTO>? = null
 
     @Autowired
-    private val categoryCoverter: CategoryCoverter? = null
+    private val categoryConverter: CategoryConverter? = null
 
     val api: List<Order>
         @RequestMapping("/api")
@@ -44,7 +44,7 @@ constructor(private val orderService: OrderService) {
     private fun initialize() {
         allCats = ArrayList<CategoryDTO>()
         try {
-            allCats = categoryCoverter!!.allCats
+            allCats = categoryConverter!!.allCats
         } catch (e: Exception) {
             e.printStackTrace()
         }

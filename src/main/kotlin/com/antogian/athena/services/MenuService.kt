@@ -1,6 +1,6 @@
 package com.antogian.athena.services
 
-import com.antogian.athena.dto.CategoryCoverter
+import com.antogian.athena.dto.CategoryConverter
 import com.antogian.athena.dto.entities.CategoryDTO
 import com.antogian.athena.dto.entities.ItemDTO
 import com.antogian.athena.dto.entities.ModEntryDTO
@@ -14,7 +14,7 @@ import java.util.ArrayList
 class MenuService
 
 @Autowired
-constructor(private val categoryCoverter: CategoryCoverter) {
+constructor(private val categoryConverter: CategoryConverter) {
 
     fun getItemById(allCats: List<CategoryDTO>, id: String): ItemDTO {
         for (i in allCats.indices) {
